@@ -1,0 +1,32 @@
+{
+  "name": "taskit",
+  "version": "1.0.0",
+  "description": "Task Kit Todo app with Electronjs",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron .",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"taskit\"",
+    "package-linux": "electron-packager . --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JinsoRaj/TasKit.git"
+  },
+  "keywords": [
+    "todo",
+    "electron"
+  ],
+  "author": "Jinso Raj",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JinsoRaj/TasKit/issues"
+  },
+  "homepage": "https://github.com/JinsoRaj/TasKit#readme",
+  "dependencies": {
+    "electromon": "^1.0.10",
+    "electron": "^12.0.7",
+    "electron-packager": "^15.2.0",
+    "nedb": "^1.8.0"
+  }
+}

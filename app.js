@@ -38,11 +38,13 @@ ipcMain.on('loadAll', () => db.find({}, (err, items) => mainWindow.webContents.s
 
 //Saves item and returns it to client
 ipcMain.on('addItem', (e, item) => {
-    db.insert(item, err => {
+    db.insert(item, (err,doc) => {
         if (err) throw new Error(err)
+        //console.log(doc)
+        mainWindow.webContents.send('added', doc)
     })
 
-    mainWindow.webContents.send('added', item)
+    //mainWindow.webContents.send('added', doc)
 })
 
 // Clears database and send event to client if sussesful

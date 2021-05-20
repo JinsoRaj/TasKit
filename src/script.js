@@ -6,15 +6,16 @@ const item = document.getElementById('input1')
 const list = document.querySelector('ol')
 
 //Render Items to Screen
-const render = (item,item2) => {
+const render = (item,item2,itemid) => {
     //var anc = document.createElement("a")
     /*anc.innerHTML = item + " -> "*/
     
     //anc.setAttribute('href', "./index.html");
     const li = document.createElement('li')
-    li.innerHTML = item + "-"
+    li.innerHTML = item + " - "
+    li.setAttribute('id', itemid)
     var pre = document.createElement("code")
-    pre.innerHTML = item2
+    pre.innerHTML = item2 + itemid
     /*li.appendChild(anc)*/
     li.appendChild(pre)
     list.appendChild(li)
@@ -35,7 +36,7 @@ lis.addEventListener('click', function(e) {
 
 //Get All Items After Starting 
 window.addEventListener('load', () => ipcRenderer.send('loadAll'))
-ipcRenderer.on('loaded', (e, items) => items.forEach(item => render(item.item, item.det)))
+ipcRenderer.on('loaded', (e, items) => items.forEach(item => render(item.item, item.det, item._id)))
 
 //Send Item to the server
 form.addEventListener('submit', e => {
@@ -49,7 +50,7 @@ form.addEventListener('submit', e => {
 
 //Catches Add Item from server
 ipcRenderer.on('added', (e, item) =>{
-    render(item.item, item.det)
+    render(item.item, item.det, item._id)
 })
 
 //Catches ClearAll from menu, sends the event to server to clear the db.

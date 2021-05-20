@@ -29,8 +29,9 @@ lis.addEventListener('click', function(e) {
         console.log(e.target.id + " was clicked");
         rwin.classList.toggle('open');
         var elem = document.getElementById(e.target.id)
-        var classel = document.getElementsByClassName("rwindow")
-        console.log(classel.placeholder)
+        var inpel = document.getElementById("rwinput1")
+        inpel.setAttribute('placeholder', e.target.id)
+        console.log(inpel.placeholder)
     }
 })
 

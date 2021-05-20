@@ -9,11 +9,14 @@ const list = document.querySelector('ol')
 const render = (item,item2,itemid) => {
     //var anc = document.createElement("a")
     const li = document.createElement('li')
-    li.innerHTML = item + " - "
-    li.setAttribute('id', itemid)
+    const sp = document.createElement('span')
+    sp.innerText = item + " - "
+    //li.innerHTML = item + " - "
+    sp.setAttribute('id', itemid)
     var pre = document.createElement("code")
     pre.innerHTML = item2 + itemid
     /*li.appendChild(anc)*/
+    li.appendChild(sp)
     li.appendChild(pre)
     list.appendChild(li)
    
@@ -25,13 +28,15 @@ let rwin = document.querySelector('.rwindow')
 lis.addEventListener('click', function(e) {
     // e.target is our targetted element.
     // try doing console.log(e.target.nodeName), it will result LI
-    if(e.target && e.target.nodeName == "LI") {
+    if(e.target && e.target.nodeName == "SPAN") {
         console.log(e.target.id + " was clicked");
         rwin.classList.toggle('open');
         var elem = document.getElementById(e.target.id)
-        var inpel = document.getElementById("rwinput1")
-        inpel.setAttribute('placeholder', e.target.id)
-        console.log(inpel.placeholder)
+        var inpelhead = document.getElementById("rwinput1")
+        var inpeldet = document.getElementById("rwinput2")
+        inpelhead.setAttribute('value', elem.innerText)
+        inpeldet.setAttribute('value', elem.innerHTML)
+        console.log(elem)
     }
 })
 

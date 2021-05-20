@@ -8,9 +8,6 @@ const list = document.querySelector('ol')
 //Render Items to Screen
 const render = (item,item2,itemid) => {
     //var anc = document.createElement("a")
-    /*anc.innerHTML = item + " -> "*/
-    
-    //anc.setAttribute('href', "./index.html");
     const li = document.createElement('li')
     li.innerHTML = item + " - "
     li.setAttribute('id', itemid)
@@ -31,6 +28,9 @@ lis.addEventListener('click', function(e) {
     if(e.target && e.target.nodeName == "LI") {
         console.log(e.target.id + " was clicked");
         rwin.classList.toggle('open');
+        var elem = document.getElementById(e.target.id)
+        var classel = document.getElementsByClassName("rwindow")
+        console.log(classel.placeholder)
     }
 })
 

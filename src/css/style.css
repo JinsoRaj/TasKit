@@ -1,0 +1,8 @@
+
+.rhsw .rwindow{
+    display: none;
+}
+
+.rhsw .rwindow.open{
+    display: block;
+}

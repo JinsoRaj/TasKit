@@ -9,10 +9,12 @@ const list = document.querySelector('ol')
 const render = (item,item2) => {
     //var anc = document.createElement("a")
     /*anc.innerHTML = item + " -> "*/
-    var pre = document.createElement("code")
-    pre.innerHTML = item+item2
+    
     //anc.setAttribute('href', "./index.html");
     const li = document.createElement('li')
+    li.innerHTML = item + "-"
+    var pre = document.createElement("code")
+    pre.innerHTML = item2
     /*li.appendChild(anc)*/
     li.appendChild(pre)
     list.appendChild(li)

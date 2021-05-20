@@ -14,7 +14,7 @@ const render = (item,item2,itemid) => {
     //li.innerHTML = item + " - "
     sp.setAttribute('id', itemid)
     var pre = document.createElement("code")
-    pre.innerHTML = item2 + itemid
+    pre.innerHTML = item2
     /*li.appendChild(anc)*/
     li.appendChild(sp)
     li.appendChild(pre)
@@ -34,8 +34,10 @@ lis.addEventListener('click', function(e) {
         var elem = document.getElementById(e.target.id)
         var inpelhead = document.getElementById("rwinput1")
         var inpeldet = document.getElementById("rwinput2")
-        inpelhead.setAttribute('value', elem.innerText)
-        inpeldet.setAttribute('value', elem.innerHTML)
+        var element = elem.nextSibling;
+        console.log(element);
+        inpelhead.setAttribute('value', elem.innerText.slice(0, -3))
+        inpeldet.setAttribute('value', element.innerText)
         console.log(elem)
     }
 })

@@ -7,10 +7,10 @@ const list = document.querySelector('ol')
 
 //Render Items to Screen
 const render = item => {
-    const li = document.createElement('li')
-    li.innerHTML = item
     var anc = document.createElement("a")
-    anc.setAttribute('href', "http://www.msn.com");
+    anc.innerHTML = item
+    anc.setAttribute('href', "./index.html");
+    const li = document.createElement('li')
     li.appendChild(anc)
     list.appendChild(li)
 }

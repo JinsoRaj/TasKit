@@ -22,14 +22,20 @@
 
 <body class="bg-gray-800 text-white flex flex-row justify-between"> 
     
-    <ol class="mt-4 p-6 list-disc"></ol>
+    <ol class="mt-4 p-6 list-disc" id="olid"></ol>
     <div class="rhsw">
-        <form class="mr-4">
-            <input type="text" placeholder="New Task" class="bg-transparent rounded h-12 mt-4 pl-3" autofocus>
+        <form class="mr-4" id="form1">
+            <input type="text" placeholder="New Task" class="bg-transparent rounded h-12 mt-4 pl-3" id="input1" autofocus><br>
+            <input type="text" placeholder="details" class="bg-transparent rounded h-20 mt-4 pl-3" id="input2">
             <button type="submit" class="bg-blue-800 rounded h-12 w-16">ADD</button>
         </form><br><br>
-        <div class="rwindow">
-            <p>new rhs window with task details</p>
+        <div class="rwindo">
+            <form class="rwindow">
+                <input type="text" placeholder="old head" class="bg-transparent rounded h-10 w-22 mt-3 pl-2"><br>
+                <input type="text" placeholder="old det" class="bg-transparent rounded h-20 w-22 mt-3 pl-2"><br><br>
+                <button type="submit" class="bg-blue-800 rounded h-10 w-24 mr-4"> EDIT </button>
+                <button type="submit" class="bg-blue-800 rounded h-10 w-24 mr-4"> SAVE </button>
+            </form>
         </div>
     </div>
     <script src="./script.js"></script>

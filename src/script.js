@@ -51,9 +51,11 @@ lis.addEventListener('click', function(e) {
         inpeldet.setAttribute('value', element.innerText)
     }
 })
-function myFunction() {
+
+function closeX() {
     rwin.classList.toggle('open');
-  }
+}
+
 //Get All Items After Starting 
 window.addEventListener('load', () => ipcRenderer.send('loadAll'))
 ipcRenderer.on('loaded', (e, items) => items.forEach(item => render(item.item, item.det, item._id)))

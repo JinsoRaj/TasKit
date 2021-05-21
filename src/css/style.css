@@ -14,8 +14,9 @@
 
 #x{
     position: absolute;
-    background: red;
-    color: white;
+    background: #231e1e47;
+    color: #b660ec;
     top: 3px;
-    right: 45px;
+    right: 48px;
+    width: 19px;
 }

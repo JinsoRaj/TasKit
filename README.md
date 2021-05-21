@@ -1,6 +1,8 @@
 # TasKit
 A Todo GUI App written in Electron.js
 
+NeDB database
+
 ## GUI Images
 - Add new Tasks
 

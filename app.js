@@ -33,7 +33,7 @@ const db = new Datastore({
     autoload: true
 })
 
-// Get all items from db and send them to the client
+//Get all items from db and send them to the client
 ipcMain.on('loadAll', () => db.find({}, (err, items) => mainWindow.webContents.send('loaded', items)))
 
 //Saves item and returns it to client
@@ -44,6 +44,7 @@ ipcMain.on('addItem', (e, item) => {
     })
 })
 
+//Updates each item and returns it to client
 ipcMain.on('updateItem', (e, id,item) => {
     db.update(id, item,(err) => {
         if (err) throw new Error(err)
@@ -51,6 +52,7 @@ ipcMain.on('updateItem', (e, id,item) => {
     })
 })
 
+//Deletes each item and return deleted itemID
 ipcMain.on('deleteItem', (e, itemid) => {
     db.remove(itemid, (err,num) => {
         if (err) throw new Error(err)
@@ -58,7 +60,7 @@ ipcMain.on('deleteItem', (e, itemid) => {
     })
 })
 
-// Clears database and send event to client if sussesful
+//Clears database and send event to client if successful
 ipcMain.on('clearAll', () => {
     db.remove({}, { multi: true }, (err) => {
         if (err) throw new Error(err)

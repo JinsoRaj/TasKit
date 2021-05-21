@@ -18,8 +18,7 @@ const render = (item,item2,itemid) => {
     pre.setAttribute('id', itemid+6)
     li.appendChild(sp)
     li.appendChild(pre)
-    list.appendChild(li)
-   
+    list.appendChild(li) 
 }
 
 //Render edits on db
@@ -33,7 +32,6 @@ const render2 = (item,item2,itemid) => {
 
 const render3 = (itemid) => {
     const sp = document.getElementById(itemid)
-    //console.log(sp.parentElement.parentElement)
     sp.parentElement.parentElement.removeChild(sp.parentElement)
 }
 
@@ -75,6 +73,7 @@ form.addEventListener('submit', e => {
     ipcRenderer.send('addItem', { item: item.value , det: details})
     form.reset()
 })
+
 //update existing task - perfect
 form2.addEventListener('submit', e => {
     console.log(e.target.classList.value)
@@ -87,15 +86,10 @@ form2.addEventListener('submit', e => {
     }
 })
 
-//delete task button = reset. need to obtain hidvalue(from hidinput),delete li with hidvalueid
-//form2.addEventListener('reset', e => {
-/*    console.log(e)//take form hidvalue
-})*/
+//delete each selected Tasks
 deleteb.addEventListener('click', e =>{
-    //console.log(e)
-    console.log(e.target.form[3].defaultValue)
     var hid = e.target.form[3].defaultValue
-    ipcRenderer.send('deleteItem', {_id: hid})//todo
+    ipcRenderer.send('deleteItem', {_id: hid})
 })
 
 //Catches Add Item from server
@@ -103,14 +97,16 @@ ipcRenderer.on('added', (e, item) =>{
     render(item.item, item.det, item._id)
 })
 
+//Updates Item 
 ipcRenderer.on('updated', (e, id,item) =>{
     render2(item.item, item.det, id._id)
 })
 
+//Deletes Item
 ipcRenderer.on('deleted', (e, itemid) =>{
     render3(itemid._id)
 })
 
-//Catches ClearAll from menu, sends the event to server to clear the db.
+//Catch ClearAll from menu, sends the event to server and clear DB.
 ipcRenderer.on('clearAll', () => ipcRenderer.send('clearAll'))
 ipcRenderer.on('cleared', () => list.innerHTML = '')

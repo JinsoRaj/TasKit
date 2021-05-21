@@ -51,6 +51,13 @@ ipcMain.on('updateItem', (e, id,item) => {
     })
 })
 
+ipcMain.on('deleteItem', (e, itemid) => {
+    db.remove(itemid, (err,num) => {
+        if (err) throw new Error(err)
+        mainWindow.webContents.send('deleted', itemid)
+    })
+})
+
 // Clears database and send event to client if sussesful
 ipcMain.on('clearAll', () => {
     db.remove({}, { multi: true }, (err) => {

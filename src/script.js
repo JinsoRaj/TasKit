@@ -31,6 +31,12 @@ const render2 = (item,item2,itemid) => {
     pre.innerHTML = item2
 }
 
+const render3 = (itemid) => {
+    const sp = document.getElementById(itemid)
+    //console.log(sp.parentElement.parentElement)
+    sp.parentElement.parentElement.removeChild(sp.parentElement)
+}
+
 let lis = document.getElementById('olid')
 let rwin = document.querySelector('.rwindow')
 
@@ -86,8 +92,10 @@ form2.addEventListener('submit', e => {
 /*    console.log(e)//take form hidvalue
 })*/
 deleteb.addEventListener('click', e =>{
-    console.log(e) //e.srcElement.form[1].defaultValue
-    //e.srcElement.form[3].defaultValue
+    //console.log(e)
+    console.log(e.target.form[3].defaultValue)
+    var hid = e.target.form[3].defaultValue
+    ipcRenderer.send('deleteItem', {_id: hid})//todo
 })
 
 //Catches Add Item from server
@@ -98,6 +106,11 @@ ipcRenderer.on('added', (e, item) =>{
 ipcRenderer.on('updated', (e, id,item) =>{
     render2(item.item, item.det, id._id)
 })
+
+ipcRenderer.on('deleted', (e, itemid) =>{
+    render3(itemid._id)
+})
+
 //Catches ClearAll from menu, sends the event to server to clear the db.
 ipcRenderer.on('clearAll', () => ipcRenderer.send('clearAll'))
 ipcRenderer.on('cleared', () => list.innerHTML = '')

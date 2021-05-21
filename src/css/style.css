@@ -5,4 +5,17 @@
 
 .rhsw .rwindow.open{
     display: block;
+    position: relative;
+}
+
+.rhsw .rwindow.close{
+    display: none;
+}
+
+#x{
+    position: absolute;
+    background: red;
+    color: white;
+    top: 3px;
+    right: 45px;
 }

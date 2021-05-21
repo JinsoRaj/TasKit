@@ -38,7 +38,7 @@ lis.addEventListener('click', function(e) {
     // try doing console.log(e.target.nodeName), it will result LI
     if(e.target && e.target.nodeName == "SPAN") {
         console.log(e.target.id + " was clicked");
-        rwin.classList.toggle('open');
+        rwin.classList.add('open');
         var hidinp = document.getElementsByClassName('hidclass')
         
         hidinp[0].setAttribute('value', e.target.id)
@@ -51,7 +51,9 @@ lis.addEventListener('click', function(e) {
         inpeldet.setAttribute('value', element.innerText)
     }
 })
-
+function myFunction() {
+    rwin.classList.toggle('open');
+  }
 //Get All Items After Starting 
 window.addEventListener('load', () => ipcRenderer.send('loadAll'))
 ipcRenderer.on('loaded', (e, items) => items.forEach(item => render(item.item, item.det, item._id)))

@@ -5,6 +5,7 @@ const form = document.getElementById('form1')
 const item = document.getElementById('input1')
 const list = document.querySelector('ol')
 const form2 = document.getElementById('form2')
+const editb = document.getElementById('edit')
 
 //Render Items to Screen
 const render = (item,item2,itemid) => {
@@ -37,6 +38,7 @@ lis.addEventListener('click', function(e) {
     // e.target is our targetted element.
     // try doing console.log(e.target.nodeName), it will result LI
     if(e.target && e.target.nodeName == "SPAN") {
+        form2.reset()
         console.log(e.target.id + " was clicked");
         rwin.classList.add('open');
         var hidinp = document.getElementsByClassName('hidclass')
@@ -69,12 +71,14 @@ form.addEventListener('submit', e => {
 })
 //update existing task - perfect
 form2.addEventListener('submit', e => {
-    e.preventDefault()
-    const task = document.getElementById("rwinput1").value;
-    const detail = document.getElementById("rwinput2").value;
-    var hidvalue = document.getElementById("rwinput3").value;
-    ipcRenderer.send('updateItem', {_id: hidvalue},{ item: task , det: detail})
-    form.reset()
+    //console.log(e.target.classList.value)
+    if(e.target.classList.value == "rwindow open"){
+        e.preventDefault()
+        const task = document.getElementById("rwinput1").value;
+        const detail = document.getElementById("rwinput2").value;
+        var hidvalue = document.getElementById("rwinput3").value;
+        ipcRenderer.send('updateItem', {_id: hidvalue},{ item: task , det: detail})
+    }
 })
 
 //Catches Add Item from server

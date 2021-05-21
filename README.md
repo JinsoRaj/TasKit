@@ -20,5 +20,6 @@ A Todo GUI App written in Electron.js
 </details>
 <details>
   <summary> Find more TODO </summary>
+
   - :joy: :stuck_out_tongue_closed_eyes: :satisfied: :running:
 </details>

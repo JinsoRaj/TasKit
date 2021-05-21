@@ -40,21 +40,15 @@ ipcMain.on('loadAll', () => db.find({}, (err, items) => mainWindow.webContents.s
 ipcMain.on('addItem', (e, item) => {
     db.insert(item, (err,doc) => {
         if (err) throw new Error(err)
-        //console.log(doc)
         mainWindow.webContents.send('added', doc)
     })
-
-    //mainWindow.webContents.send('added', doc)
 })
 
 ipcMain.on('updateItem', (e, id,item) => {
     db.update(id, item,(err) => {
         if (err) throw new Error(err)
-        //console.log(doc)
         mainWindow.webContents.send('updated', id,item)
     })
-
-    //mainWindow.webContents.send('added', doc)
 })
 
 // Clears database and send event to client if sussesful

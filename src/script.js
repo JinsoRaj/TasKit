@@ -8,38 +8,26 @@ const form2 = document.getElementById('form2')
 
 //Render Items to Screen
 const render = (item,item2,itemid) => {
-    //var anc = document.createElement("a")
     const li = document.createElement('li')
     const sp = document.createElement('span')
     sp.innerText = item + " - "
-    //li.innerHTML = item + " - "
     sp.setAttribute('id', itemid)
     var pre = document.createElement("code")
     pre.innerHTML = item2
     pre.setAttribute('id', itemid+6)
-    /*li.appendChild(anc)*/
     li.appendChild(sp)
     li.appendChild(pre)
     list.appendChild(li)
    
 }
 
+//Render edits on db
 const render2 = (item,item2,itemid) => {
-    //var anc = document.createElement("a")
-    console.log(itemid._id);
-    const sp = document.getElementById(itemid._id)
-    //console.log(sp)
-    /*const li = sp.parentElement*/
+    console.log(itemid);
+    const sp = document.getElementById(itemid)
     sp.innerText = item + " - "
-    //li.innerHTML = item + " - "
-    /*sp.setAttribute('id', itemid)*/
-    var pre = document.getElementById(itemid._id+6)
+    var pre = document.getElementById(itemid+6)
     pre.innerHTML = item2
-    /*li.appendChild(anc)*/
-    /*li.appendChild(sp)
-    li.appendChild(pre)
-    list.appendChild(li)*/
-   
 }
 
 let lis = document.getElementById('olid')
@@ -58,10 +46,9 @@ lis.addEventListener('click', function(e) {
         var inpelhead = document.getElementById("rwinput1")
         var inpeldet = document.getElementById("rwinput2")
         var element = elem.nextSibling;
-        //console.log(element);
+        //remove " - " from input1
         inpelhead.setAttribute('value', elem.innerText.slice(0, -3))
         inpeldet.setAttribute('value', element.innerText)
-        //console.log(elem)
     }
 })
 
@@ -74,8 +61,6 @@ form.addEventListener('submit', e => {
     e.preventDefault()
     const details = document.getElementById("input2").value;
     ipcRenderer.send('addItem', { item: item.value , det: details})
-    /*const item2 = document.getElementsByTagName("input")[1].value;*/
-    //console.log(item2);
     form.reset()
 })
 //update existing task - perfect
@@ -84,10 +69,7 @@ form2.addEventListener('submit', e => {
     const task = document.getElementById("rwinput1").value;
     const detail = document.getElementById("rwinput2").value;
     var hidvalue = document.getElementById("rwinput3").value;
-    /*console.log(hidvalue)*/
     ipcRenderer.send('updateItem', {_id: hidvalue},{ item: task , det: detail})
-    /*const item2 = document.getElementsByTagName("input")[1].value;*/
-    //console.log(item2);
     form.reset()
 })
 
@@ -97,7 +79,7 @@ ipcRenderer.on('added', (e, item) =>{
 })
 
 ipcRenderer.on('updated', (e, id,item) =>{
-    render2(item.item, item.det, id)
+    render2(item.item, item.det, id._id)
 })
 //Catches ClearAll from menu, sends the event to server to clear the db.
 ipcRenderer.on('clearAll', () => ipcRenderer.send('clearAll'))

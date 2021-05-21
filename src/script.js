@@ -16,10 +16,29 @@ const render = (item,item2,itemid) => {
     sp.setAttribute('id', itemid)
     var pre = document.createElement("code")
     pre.innerHTML = item2
+    pre.setAttribute('id', itemid+6)
     /*li.appendChild(anc)*/
     li.appendChild(sp)
     li.appendChild(pre)
     list.appendChild(li)
+   
+}
+
+const render2 = (item,item2,itemid) => {
+    //var anc = document.createElement("a")
+    console.log(itemid._id);
+    const sp = document.getElementById(itemid._id)
+    //console.log(sp)
+    /*const li = sp.parentElement*/
+    sp.innerText = item + " - "
+    //li.innerHTML = item + " - "
+    /*sp.setAttribute('id', itemid)*/
+    var pre = document.getElementById(itemid._id+6)
+    pre.innerHTML = item2
+    /*li.appendChild(anc)*/
+    /*li.appendChild(sp)
+    li.appendChild(pre)
+    list.appendChild(li)*/
    
 }
 
@@ -59,14 +78,14 @@ form.addEventListener('submit', e => {
     //console.log(item2);
     form.reset()
 })
-//update existing task
+//update existing task - perfect
 form2.addEventListener('submit', e => {
     e.preventDefault()
     const task = document.getElementById("rwinput1").value;
     const detail = document.getElementById("rwinput2").value;
     var hidvalue = document.getElementById("rwinput3").value;
-    console.log(hidvalue)
-    ipcRenderer.send('updateItem', { item: item.value , det: details})
+    /*console.log(hidvalue)*/
+    ipcRenderer.send('updateItem', {_id: hidvalue},{ item: task , det: detail})
     /*const item2 = document.getElementsByTagName("input")[1].value;*/
     //console.log(item2);
     form.reset()
@@ -77,6 +96,9 @@ ipcRenderer.on('added', (e, item) =>{
     render(item.item, item.det, item._id)
 })
 
+ipcRenderer.on('updated', (e, id,item) =>{
+    render2(item.item, item.det, id)
+})
 //Catches ClearAll from menu, sends the event to server to clear the db.
 ipcRenderer.on('clearAll', () => ipcRenderer.send('clearAll'))
 ipcRenderer.on('cleared', () => list.innerHTML = '')

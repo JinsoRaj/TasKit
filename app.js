@@ -47,11 +47,11 @@ ipcMain.on('addItem', (e, item) => {
     //mainWindow.webContents.send('added', doc)
 })
 
-ipcMain.on('updateItem', (e, item) => {
-    db.update(item, (err,doc) => {
+ipcMain.on('updateItem', (e, id,item) => {
+    db.update(id, item,(err) => {
         if (err) throw new Error(err)
         //console.log(doc)
-        mainWindow.webContents.send('added', doc)
+        mainWindow.webContents.send('updated', id,item)
     })
 
     //mainWindow.webContents.send('added', doc)

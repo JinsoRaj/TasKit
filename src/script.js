@@ -5,7 +5,7 @@ const form = document.getElementById('form1')
 const item = document.getElementById('input1')
 const list = document.querySelector('ol')
 const form2 = document.getElementById('form2')
-const editb = document.getElementById('edit')
+const deleteb = document.getElementById('delet')
 
 //Render Items to Screen
 const render = (item,item2,itemid) => {
@@ -71,7 +71,7 @@ form.addEventListener('submit', e => {
 })
 //update existing task - perfect
 form2.addEventListener('submit', e => {
-    //console.log(e.target.classList.value)
+    console.log(e.target.classList.value)
     if(e.target.classList.value == "rwindow open"){
         e.preventDefault()
         const task = document.getElementById("rwinput1").value;
@@ -79,6 +79,15 @@ form2.addEventListener('submit', e => {
         var hidvalue = document.getElementById("rwinput3").value;
         ipcRenderer.send('updateItem', {_id: hidvalue},{ item: task , det: detail})
     }
+})
+
+//delete task button = reset. need to obtain hidvalue(from hidinput),delete li with hidvalueid
+//form2.addEventListener('reset', e => {
+/*    console.log(e)//take form hidvalue
+})*/
+deleteb.addEventListener('click', e =>{
+    console.log(e) //e.srcElement.form[1].defaultValue
+    //e.srcElement.form[3].defaultValue
 })
 
 //Catches Add Item from server

@@ -47,6 +47,16 @@ ipcMain.on('addItem', (e, item) => {
     //mainWindow.webContents.send('added', doc)
 })
 
+ipcMain.on('updateItem', (e, item) => {
+    db.update(item, (err,doc) => {
+        if (err) throw new Error(err)
+        //console.log(doc)
+        mainWindow.webContents.send('added', doc)
+    })
+
+    //mainWindow.webContents.send('added', doc)
+})
+
 // Clears database and send event to client if sussesful
 ipcMain.on('clearAll', () => {
     db.remove({}, { multi: true }, (err) => {

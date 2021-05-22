@@ -18,7 +18,7 @@ const render = (item,item2,itemid) => {
     pre.setAttribute('id', itemid+6)
     li.appendChild(sp)
     li.appendChild(pre)
-    list.appendChild(li) 
+    list.appendChild(li)
 }
 
 //Render edits on db
@@ -33,6 +33,7 @@ const render2 = (item,item2,itemid) => {
 const render3 = (itemid) => {
     const sp = document.getElementById(itemid)
     sp.parentElement.parentElement.removeChild(sp.parentElement)
+    ipcRenderer.invoke('show-delete-notification', sp.innerText);
 }
 
 let lis = document.getElementById('olid')
@@ -92,21 +93,26 @@ deleteb.addEventListener('click', e =>{
     ipcRenderer.send('deleteItem', {_id: hid})
 })
 
-//Catches Add Item from server
+//Catches Add Item from server and send noti
 ipcRenderer.on('added', (e, item) =>{
-    render(item.item, item.det, item._id)
+    render(item.item, item.det, item._id) 
+    ipcRenderer.invoke('show-add-notification', item.item);
 })
 
-//Updates Item 
+//Updates Item and send noti
 ipcRenderer.on('updated', (e, id,item) =>{
     render2(item.item, item.det, id._id)
+    ipcRenderer.invoke('show-update-notification', item.item);
 })
 
-//Deletes Item
+//Deletes Item and render(noti)
 ipcRenderer.on('deleted', (e, itemid) =>{
     render3(itemid._id)
 })
 
-//Catch ClearAll from menu, sends the event to server and clear DB.
+//Catch ClearAll from menu, sends the event to server, clear DB and send noti.
 ipcRenderer.on('clearAll', () => ipcRenderer.send('clearAll'))
-ipcRenderer.on('cleared', () => list.innerHTML = '')
+ipcRenderer.on('cleared', () =>{
+    list.innerHTML = ''
+    ipcRenderer.invoke('show-clear-notification');
+})

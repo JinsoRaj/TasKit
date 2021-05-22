@@ -1,5 +1,5 @@
 # TasKit
-A Todo GUI App written in Electron.js
+A Todo GUI App with Electron.js
 
 NeDB database
 
@@ -15,7 +15,7 @@ NeDB database
 
 ### TODO
 <details>
-  <summary> Task Notifications </summary>
+  <summary> <s>Task Notifications</s> </summary>
 
   - Added, Updated, Deleted noti.
   - ClearAll DB noti
